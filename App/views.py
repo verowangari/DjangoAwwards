@@ -22,7 +22,7 @@ def Signup(request):
 			email = form.cleaned_data.get('email')
 			password = form.cleaned_data.get('password')
 			User.objects.create_user(username=username, email=email, password=password)
-			return redirect('welcome')
+			return redirect('index')
 	else:
 		form = SignupForm()
 	
