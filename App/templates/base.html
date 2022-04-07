@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Awwards!</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet">  
+</head>
+  <body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="https://bulma.io">
+            <img src="https://external-preview.redd.it/iDdntscPf-nfWKqzHRGFmhVxZm4hZgaKe5oyFws-yzA.png?width=640&crop=smart&auto=webp&s=bfd318557bf2a5b3602367c9c4d9cd84d917ccd5" >
+          </a>
+      
+          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+      
+        <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-start">
+            <a href="{% url 'welcome' %}" class="navbar-item">
+              Home
+            </a>
+      
+            <a class="navbar-item">
+              Documentation
+            </a>
+            <a href="" class="navbar-item">
+                <i class="material-icons">face</i>
+                Profile - <strong>{{ request.user }}</strong>
+              </a>
+      
+              
+          </div>
+      
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="buttons">
+               
+
+                <form class="d-flex" method="POST" action="{% url 'search_users'%}">
+                    <div class="field has-addons has-addons-centered">
+                    {% csrf_token%}
+          
+                     <div class="control">
+                     <input class="input" name="searched" type="Search" placeholder="Search for a user"> </div>
+                     <div class="control">
+                     <button class="button is-primary" type="submit">Search</button> </div>
+                
+                    </div>
+                   </form>
+                   
+                   <a href="{% url 'logout' %}" class="button is-light">
+                    Log Out
+                  </a>
+                </div>
+
+            </div>
+          </div>
+        </div>
+      </nav>
+      
+  <section class="section">
+    <div class="container">
+     {% block content %}
+
+     {% endblock %}
+
+     {% block pagination %}
+     
+     {% endblock %}
+
+    </div>
+  </section>
+  </body>
+</html>
