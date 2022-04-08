@@ -5,10 +5,31 @@ from .forms import SignupForm,UserUpdateForm, ProfileUpdateForm
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from .models import Post
 #................
 # Create your views here.
+# def index(request):
+#     return render(request, 'index.html')
+
 def index(request):
-    return render(request, 'index.html')
+    user=request.user
+    # posts=Post.objects.filter(user=user)
+    posts = Post.objects.filter(user_id=user.id)
+    
+    group_ids=[]
+    
+    for post in posts:
+        group_ids.append(post.post_id)
+
+    post_items = Post.objects.all()
+    template=loader.get_template('index.html')
+
+    context={
+    'post_items':post_items,
+}
+
+    return HttpResponse(template.render(context,request))
+
 
 
 def login(request):
