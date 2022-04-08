@@ -1,9 +1,43 @@
 
+<!-- Implement style here -->
+
 {% extends 'base.html' %}
 {% load static %}
 
 {% block content %}
 
-<h1>This is the index page</h1>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+       
 
+    </head>
+<body class=" container m-5">
+  
+    <div class="container d-flex flex-row ">
+
+    <div class="col-md-9"><div class="row">
+        {% for post_item in post_items %}
+        
+        <div class="col-md-4">
+            <div class="card my-2 " width="18px" >
+                <img src="{{post_item.picture.url}}" class="image-thumbail" alt="...">
+                <div class="card-body">
+                    <small >Description:{{post_item.description}}</small> <br>
+                  <small >Date:{{post_item.posted}}</small> <br/>
+                  
+                </div>
+                
+              </div>
+        </div>
+        {% empty %}
+        <h3>No Photos... </h3>
+        {% endfor %}
+    </div>
+
+</div>
+
+
+    </div>
+</body>
+</html>
 {% endblock %}
