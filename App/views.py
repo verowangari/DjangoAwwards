@@ -16,12 +16,12 @@ def index(request):
     # posts=Post.objects.filter(user=user)
     posts = Post.objects.filter(user_id=user.id)
     
-    group_ids=[]
+    # group_ids=[]
     
     for post in posts:
-        group_ids.append(post.post_id)
+        # group_ids.append(post.post_profile)
 
-    post_items = Post.objects.all()
+        post_items = Post.objects.all()
     template=loader.get_template('index.html')
 
     context={
@@ -73,7 +73,7 @@ def Search_users(request):
     else:
         return HttpResponse(template.render())
     
-@login_required
+# @login_required
 def profile(request):
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
@@ -97,14 +97,14 @@ def profile(request):
 
     return render(request, 'profile.html', context)
 
-@login_required      
+# @login_required      
 def NewPost(request):
     current_user=request.user
     if request.method == 'POST':
         form = NewPostForm(request.POST, request.FILES)
         if form.is_valid():
             new_post=form.save(commit=False)
-            new_post.user=current_user
+            new_post.profile=current_user
             new_post.save()
             print('post saved')
             return redirect(index)
