@@ -43,7 +43,10 @@
           <div class="navbar-end">
             <div class="navbar-item">
               <div class="buttons">
-               
+                <a href="{% url 'newpost' %}" class="navbar-item">
+                  <i style="color: green;" class="material-icons">perm_media</i>
+                  <strong>New Post</strong>
+                </a>
 
                 <form class="d-flex" method="POST" action="{% url 'search_users'%}">
                     <div class="field has-addons has-addons-centered">
