@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -135,3 +138,10 @@ LOGIN_REDIRECT_URL='index'
 LOGOUT_REDIRECT_URL='login'
 
 LOGIN_URL='/user/login/'
+
+# adding config
+cloudinary.config( 
+  cloud_name = 'dbmprxkja', 
+  api_key = '934679428694675', 
+  api_secret = 'KPYcLgUjm71mz8lOmYb3LlXV7xs' 
+)
