@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.template import loader
 from django.http  import HttpResponse
-from .forms import SignupForm,UserUpdateForm, ProfileUpdateForm
+from .forms import SignupForm,UserUpdateForm, ProfileUpdateForm,NewPostForm
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -96,3 +96,18 @@ def profile(request):
     }
 
     return render(request, 'profile.html', context)
+
+@login_required      
+def NewPost(request):
+    current_user=request.user
+    if request.method == 'POST':
+        form = NewPostForm(request.POST, request.FILES)
+        if form.is_valid():
+            new_post=form.save(commit=False)
+            new_post.user=current_user
+            new_post.save()
+            print('post saved')
+            return redirect(index)
+    else:
+        form = NewPostForm()
+    return render(request, 'newpost.html',{'form':form})

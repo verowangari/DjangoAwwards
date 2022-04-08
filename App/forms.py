@@ -1,5 +1,5 @@
 from django import forms
-from .models import Profile
+from .models import Profile,Post
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
@@ -63,3 +63,9 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['image']
+
+
+class NewPostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['title','description','picture','projecturl']	
