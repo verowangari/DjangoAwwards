@@ -49,9 +49,9 @@ class PostList(APIView):
 
 
 
-def posts(request,id):
-    proj = Post.objects.get(id = id)
-    return render(request,'readmore.html',{"posts":proj})
+def posts(request, id):
+    postie = Post.objects.get(id=id)
+    return render(request, 'readmore.html', {"postie": postie})
 
 def profile(request,id):
     prof = Profile.objects.get(user = id)
