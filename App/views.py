@@ -5,7 +5,11 @@ from .forms import SignupForm,UserUpdateForm, ProfileUpdateForm,NewPostForm,Rate
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .models import Post
+from .models import Post,Profile
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializer import PostSerializer,ProfileSerializer
+from rest_framework import status
 #................
 # Create your views here.
 # def index(request):
@@ -30,7 +34,43 @@ def index(request):
 
     return HttpResponse(template.render(context,request))
 
+class PostList(APIView):
+    def get(self,request,format = None):
+        all_posts = Post.objects.all()
+        serializerdata = PostSerializer(all_posts,many = True)
+        return Response(serializerdata.data)
+    
+    def post(self, request, format=None):
+        serializers = PostSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+
+def posts(request,id):
+    proj = Post.objects.get(id = id)
+    return render(request,'readmore.html',{"posts":proj})
+
+def profile(request,id):
+    prof = Profile.objects.get(user = id)
+    return render(request,'profile.html',{"profile":prof})
+
+class ProfileList(APIView):
+    def get(self,request,format = None):
+        all_profile = Profile.objects.all()
+        serializerdata = ProfileSerializer(all_profile,many = True)
+        return Response(serializerdata.data)
+    def post(self, request, format=None):
+        serializers = ProfileSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+   
 
 def login(request):
   template = loader.get_template('login.html')
