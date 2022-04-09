@@ -11,7 +11,15 @@
        
 
     </head>
-<body class=" container m-5">
+   
+    <div class="jumbotron jumbotron-fluid bg-light">
+        <div class="container">
+            <center><h2 class="display-4">Awwards</h2>
+                <p class="lead">Check out other peoples projects, Review and Rate them! You can also post yours to be reviewed!
+                </p></center>
+        </div>
+    </div>
+<body class=" container-fluid">
   
     <div class="container d-flex flex-row ">
 
@@ -21,9 +29,13 @@
         <div class="col-md-4">
             <div class="card my-2 " width="18px" >
                 <img src="{{post_item.picture.url}}" class="image-thumbail" alt="...">
+                
                 <div class="card-body">
-                    <small >Description:{{post_item.description}}</small> <br>
-                  <small >Date:{{post_item.posted}}</small> <br/>
+                    <strong><small >Title:{{post_item.title}}</small> <br></strong>
+                    <small > <em><strong>Description:</strong> {{post_item.description}} </em></small> <br>
+                  <small ><strong>Date:</strong>{{post_item.posted}}</small> <br/>
+                  <a href="posts/{{post_item.id}}">Readmore</a>
+                  <!-- <small class="button btn-sm" >:{{post_item.projecturl}}</small> <br> -->
                   
                 </div>
                 
@@ -38,6 +50,7 @@
 
 
     </div>
+
 </body>
 </html>
 {% endblock %}
