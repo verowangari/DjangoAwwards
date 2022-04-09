@@ -1,0 +1,57 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<div class="class" style="font-family: 'Jost', sans-serif;">
+    {% extends 'base.html'%}
+    {% load ratings %}
+    {%block content%}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-sm">
+                <div class="view view-cascade overlay">
+                    
+                    <img class="img-fluid" src="{{post.picture.url}}" alt="Card image cap">
+                    <a href="#!">
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm">
+                <!-- Card content -->
+                <div class="card-body card-body-cascade text-center">
+
+                    <!-- Title -->
+                    <h4 class="card-title"><strong>{{post.title}}</strong></h4>
+                    <!-- Subtitle -->
+                    <h6 class="font-weight-bold indigo-text py-2">Description</h6>
+                    <!-- Text -->
+                    <p class="card-text">{{post.description}}
+                    </p>
+                    <a href="{{post.posturl}}">
+                        <button class="btn btn-primary">Check out</button>
+                    </a>
+                    <h5 style="padding-left: 120%;" class="text-secondary">By: {{post.user}}</h5>
+                </div>
+            </div>
+        </div>
+        <div class="ratings">
+            <h3 class="pt-3 h2">Rate</h3>
+            <div class="row">
+                <div class="col-sm">
+                    <h4>Usability</h4>
+                    {% ratings posts %}
+                    <h4>Usability</h4>
+                </div>
+                <div class="col-sm">
+                    <h4>Design</h4>
+                    {% ratings posts %}
+                </div>
+                <div class="col-sm">
+                    <h4>Content</h4>
+                    {% ratings posts %}
+                </div>
+            </div>
+            <a href="{% url "rate" posts.id %}" class="h1">Review</a>
+    </div>
+    <div>
+        {%endblock%}
+    </div>
