@@ -1,5 +1,5 @@
 from django import forms
-from .models import Profile,Post
+from .models import Profile,Post,Revieww
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
@@ -69,3 +69,12 @@ class NewPostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['title','description','picture','projecturl']	
+        
+class RateForm(forms.ModelForm):
+    # text = forms.CharField(widget=forms.Textarea())
+    # rate = forms.ChoiceField(choices=RATE_CHOICES,widget=forms.Select(),required=True)
+
+    class Meta:
+        model = Revieww
+        fields = ['text','design','usability','content']
+        

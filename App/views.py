@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.template import loader
 from django.http  import HttpResponse
-from .forms import SignupForm,UserUpdateForm, ProfileUpdateForm,NewPostForm
+from .forms import SignupForm,UserUpdateForm, ProfileUpdateForm,NewPostForm,RateForm
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -113,3 +113,22 @@ def NewPost(request):
     else:
         form = NewPostForm()
     return render(request, 'newpost.html',{'form':form})
+
+# @login_required(login_url='login')   
+def rate(request,post):
+    # reviews = Revieww.objects.get(projects_id = id).all()
+    # print
+    post = Post.objects.get(id = id)
+    # post = Post.objects.get(post = post)
+    user = request.user
+    if request.method == 'POST':
+        form = RateForm(request.POST)
+        if form.is_valid():
+            rate = form.save(commit=False)
+            rate.user = user
+            rate.post = post
+            rate.save()
+            return redirect('index')
+    else:
+        form = RateForm()
+    return render(request,"rate.html",{"form":form,"post":post})
