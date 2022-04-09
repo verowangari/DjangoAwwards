@@ -1,10 +1,13 @@
 {% extends 'base.html'%}
 {%block content%}
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+{% load crispy_forms_tags %}
+
+
 <div class="container" style="font-family: 'Jost', sans-serif;">
-    <p>{{post.title}}</p>
-    <p>{{post.description }}</p>
+    <!-- {%for post_item in posts %}
+    <p>{{post_item.title}}</p>
+    <p>{{post_item.description }}</p>
+    {%endfor%} -->
     <div class="row  p-5 mt-5">
 
         <div class="col-md-6">
@@ -13,7 +16,7 @@
 
                     <form class="form" action="" method="post" novalidate>
                         {% csrf_token %}
-                      
+                        {{ form|crispy }}
                         <div class="row pl-5">
                             <button type="submit" class="btn btn-sm btn-outline-primary"
                                 style="margin-top:14px; margin-left:-10px">Review</button>

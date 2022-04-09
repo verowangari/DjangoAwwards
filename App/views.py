@@ -155,7 +155,7 @@ def NewPost(request):
     return render(request, 'newpost.html',{'form':form})
 
 # @login_required(login_url='login')   
-def rate(request,post):
+def rate(request,id):
     # reviews = Revieww.objects.get(projects_id = id).all()
     # print
     post = Post.objects.get(id = id)
@@ -165,7 +165,7 @@ def rate(request,post):
         form = RateForm(request.POST)
         if form.is_valid():
             rate = form.save(commit=False)
-            rate.user = user
+            rate.profile = user
             rate.post = post
             rate.save()
             return redirect('index')
