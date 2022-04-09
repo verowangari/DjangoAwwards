@@ -74,6 +74,7 @@ def Search_users(request):
         return HttpResponse(template.render())
     
 # @login_required
+@login_required(login_url='login')
 def profile(request):
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
@@ -97,7 +98,8 @@ def profile(request):
 
     return render(request, 'profile.html', context)
 
-# @login_required      
+# @login_required
+@login_required(login_url='login')      
 def NewPost(request):
     current_user=request.user
     if request.method == 'POST':
