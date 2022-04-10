@@ -15,30 +15,30 @@ from rest_framework import status
 # def index(request):
 #     return render(request, 'index.html')
 
-# def index(request):
-#     user=request.user
-#     # posts=Post.objects.filter(user=user)
-#     posts = Post.objects.filter(user_id=user.id)
-    
-#     # group_ids=[]
-    
-#     for post in posts:
-#         # group_ids.append(post.post_profile)
-
-#         post_items = Post.objects.all()
-#     template=loader.get_template('index.html')
-
-#     context={
-#     'post_items':post_items,
-# }
-
-#     return HttpResponse(template.render(context,request))
-
-
-
 def index(request):
-    post_items = Post.objects.all()
-    return render(request, 'index.html', {"post_items": post_items})
+    user=request.user
+    # posts=Post.objects.filter(user=user)
+    posts = Post.objects.filter(user_id=user.id)
+    
+    # group_ids=[]
+    
+    for post in posts:
+        # group_ids.append(post.post_profile)
+
+        post_items = Post.objects.all()
+    template=loader.get_template('index.html')
+
+    context={
+    'post_items':post_items,
+}
+
+    return HttpResponse(template.render(context,request))
+
+
+
+# def index(request):
+#     post_items = Post.objects.all()
+#     return render(request, 'index.html', {"post_items": post_items})
 
 
 
