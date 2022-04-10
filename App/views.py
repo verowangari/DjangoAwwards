@@ -15,24 +15,32 @@ from rest_framework import status
 # def index(request):
 #     return render(request, 'index.html')
 
+# def index(request):
+#     user=request.user
+#     # posts=Post.objects.filter(user=user)
+#     posts = Post.objects.filter(user_id=user.id)
+    
+#     # group_ids=[]
+    
+#     for post in posts:
+#         # group_ids.append(post.post_profile)
+
+#         post_items = Post.objects.all()
+#     template=loader.get_template('index.html')
+
+#     context={
+#     'post_items':post_items,
+# }
+
+#     return HttpResponse(template.render(context,request))
+
+
+
 def index(request):
-    user=request.user
-    # posts=Post.objects.filter(user=user)
-    posts = Post.objects.filter(user_id=user.id)
-    
-    # group_ids=[]
-    
-    for post in posts:
-        # group_ids.append(post.post_profile)
+    post_items = Post.objects.all()
+    return render(request, 'index.html', {"post_items": post_items})
 
-        post_items = Post.objects.all()
-    template=loader.get_template('index.html')
 
-    context={
-    'post_items':post_items,
-}
-
-    return HttpResponse(template.render(context,request))
 
 class PostList(APIView):
     def get(self,request,format = None):
@@ -154,7 +162,7 @@ def NewPost(request):
         form = NewPostForm()
     return render(request, 'newpost.html',{'form':form})
 
-# @login_required(login_url='login')   
+@login_required(login_url='login')   
 def rate(request,id):
     # reviews = Revieww.objects.get(projects_id = id).all()
     # print
@@ -167,7 +175,7 @@ def rate(request,id):
             rate = form.save(commit=False)
             rate.profile = user
             rate.post = post
-            rate.save()
+            # rate.save()
             return redirect('index')
     else:
         form = RateForm()
