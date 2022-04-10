@@ -15,10 +15,10 @@ from rest_framework import status
 # def index(request):
 #     return render(request, 'index.html')
 
-def index(request):
+def index(request,id):
     user=request.user
     # posts=Post.objects.filter(user=user)
-    posts = Post.objects.filter(user_id=user.id)
+    posts = Post.objects.filter(user=id)
     
     # group_ids=[]
     
