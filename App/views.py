@@ -22,7 +22,7 @@ def index(request):
     
     # group_ids=[]
     
-    for post in posts:
+    for posts in posts:
         # group_ids.append(post.post_profile)
 
         post_items = Post.objects.all()
