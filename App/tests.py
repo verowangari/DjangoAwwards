@@ -8,7 +8,7 @@ from .models import Profile, Post,Revieww
 
 class ProfileTestClass(TestCase):
     def setUp(self):
-        self.profile=Profile(User='Veronica')
+        self.profile=Profile(image='default.jpg')
 
     def test_instance(self):
         self.assertTrue(isinstance(self.profile, Profile))
